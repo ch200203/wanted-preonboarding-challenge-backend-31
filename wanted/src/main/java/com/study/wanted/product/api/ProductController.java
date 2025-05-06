@@ -1,10 +1,10 @@
-package com.study.wanted.product.api.controller;
+package com.study.wanted.product.api;
 
 import com.study.wanted.common.dto.ApiResponseDto;
-import com.study.wanted.product.api.dto.CreateProductRequest;
-import com.study.wanted.product.entity.Product;
-import com.study.wanted.product.service.query.ProductQueryHandler;
+import com.study.wanted.product.dto.CreateProductRequest;
+import com.study.wanted.product.dto.ProductResponseDto;
 import com.study.wanted.product.service.command.ProductCommandHandler;
+import com.study.wanted.product.service.query.ProductQueryHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,6 +23,7 @@ public class ProductController {
     private final ProductCommandHandler productCommandHandler;
     private final ProductQueryHandler productQueryHandler;
 
+    // TODO 응답 포맷 확인하여 수정하기 임시 응답
     @PostMapping
     public ResponseEntity<ApiResponseDto> creteProduct(@RequestBody CreateProductRequest request) {
         Long productId = productCommandHandler.createProduct(request);
@@ -31,9 +32,8 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<ApiResponseDto> getProduct(@PathVariable Long id) {
-        productQueryHandler.getProduct(id);
-        ApiResponseDto apiResponseDto = ApiResponseDto.successApiResponse();
-        return ResponseEntity.ok(apiResponseDto);
+        ProductResponseDto responseDto = productQueryHandler.getProduct(id);
+        return ResponseEntity.ok(ApiResponseDto.successApiResponse(responseDto));
     }
 
     /*
@@ -41,6 +41,10 @@ public class ProductController {
     검색 기능 포함
     필터 항목: 태그, 등록일, 판매자, 브랜드, 가격 범위, 카테고리, 재고 유무
      */
+    @GetMapping
+    public ResponseEntity<ApiResponseDto> getProducts() {
+        return ResponseEntity.ok(ApiResponseDto.successApiResponse(null));
+    }
 
 
 }

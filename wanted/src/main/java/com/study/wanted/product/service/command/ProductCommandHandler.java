@@ -1,6 +1,6 @@
 package com.study.wanted.product.service.command;
 
-import com.study.wanted.product.api.dto.CreateProductRequest;
+import com.study.wanted.product.dto.CreateProductRequest;
 import com.study.wanted.product.entity.Product;
 import com.study.wanted.product.entity.ProductDetail;
 import com.study.wanted.product.entity.ProductPrice;

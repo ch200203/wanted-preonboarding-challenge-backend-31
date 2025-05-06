@@ -1,4 +1,4 @@
-package com.study.wanted.product.api.dto;
+package com.study.wanted.product.dto;
 
 public record CreateProductRequest(
         String name,
